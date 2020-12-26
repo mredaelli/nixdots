@@ -11,7 +11,6 @@
   i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "it_IT.UTF-8/UTF-8" ];
 
   imports = [
-    ../hardware-configuration.nix
     ../cachix.nix
   ];
 

@@ -6,12 +6,11 @@ let
 in {
   imports = [
     ./hardware-configuration.nix
-    ./cachix.nix
-    ./modules/neovim_nightly.nix
-    ./modules/common_settings.nix
-    ./modules/basic.nix
-    ./modules/x.nix
-    ./modules/user.nix
+    ../../modules/neovim_nightly.nix
+    ../../modules/common_settings.nix
+    ../../modules/basic.nix
+    ../../modules/x.nix
+    ../../modules/user.nix
   ];
 
   boot.loader.grub = {
@@ -59,9 +58,9 @@ in {
   nixpkgs.config = baseConfig // {
     packageOverrides = pkgs: {
       # mredaelli = mredaelli;
-      # unstable = import <nixos-unstable> {
-      #   config = config.nixpkgs.config;
-      # };
+      unstable = import <nixos-unstable> {
+        config = config.nixpkgs.config;
+      };
     };
   };
 

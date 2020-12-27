@@ -55,14 +55,5 @@ in {
     # };
   };
 
-  nixpkgs.config = baseConfig // {
-    packageOverrides = pkgs: {
-      # mredaelli = mredaelli;
-      unstable = import <nixos-unstable> {
-        config = config.nixpkgs.config;
-      };
-    };
-  };
-
   system.stateVersion = "18.03";
 }

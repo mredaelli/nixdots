@@ -1,8 +1,11 @@
 { config, pkgs, options, ... }:
-{
+let
+  baseConfig = { allowUnfree = true; };
+  unstable = import <nixos-unstable> { config = baseConfig; };
+in {
   nix.nixPath =
     options.nix.nixPath.default ++
-    [ "nixpkgs-overlays=/etc/nixos/overlays-compat/" ]
+    [ "nixpkgs-overlays=/etc/nixos/nixdots/overlays-compat/" ]
   ;
   documentation = {
     doc.enable = false;
@@ -14,10 +17,14 @@
     ../cachix.nix
   ];
 
-  nixpkgs.config = {
+  nixpkgs.config = baseConfig // {
+    allowUnfree = true;
     pulseaudio = true;
 
     packageOverrides = pkgs: {
+      unstable = import <nixos-unstable> {
+        config = config.nixpkgs.config;
+      };
       jre = pkgs.jdk11;
       notmuch = pkgs.notmuch.override {
         withEmacs = false;

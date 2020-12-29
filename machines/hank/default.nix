@@ -25,6 +25,9 @@
     enable = true;
     extraBackends = [ pkgs.epkowa ];
   };
+  environment = {
+    systemPackages = with pkgs; [ xsane ];
+  };
 
   # virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;

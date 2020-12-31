@@ -31,6 +31,7 @@
       bat
       sd
       du-dust
+      ncdu
       broot
 
       starship
@@ -60,6 +61,7 @@
     variables = {
       EDITOR = "nvim";
     };
+    shells = [ pkgs.bash pkgs.fish ];
   };
 
   programs = {

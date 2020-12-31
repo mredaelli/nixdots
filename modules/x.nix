@@ -55,13 +55,14 @@
     xserver = {
       enable = true;
       #xkbVariant = "colemak";
+      displayManager.defaultSession="none+i3";
       xkbOptions = "eurosign:e,compose:ralt,terminate:ctrl_alt_bksp,caps:swapescape";
       windowManager.i3 = {
         enable = true;
-        extraSessionCommands = ''
-          xmodmap -e "keycode 117 = Prior"
-          xmodmap -e "keycode 112 = Next"
-        '';
+        # extraSessionCommands = ''
+        #   xmodmap -e "keycode 117 = Prior"
+        #   xmodmap -e "keycode 112 = Next"
+        # '';
       };
 
       xautolock = {

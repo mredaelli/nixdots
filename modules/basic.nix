@@ -40,8 +40,8 @@
       neovim-nightly
 
       git
-      gitAndTools.gitui
       gitAndTools.delta
+      gitAndTools.tig
 
 
       weechat

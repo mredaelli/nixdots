@@ -3,7 +3,8 @@ let
   baseConfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config = baseConfig; };
   # mredaelli = import /home/turing/src/nixpkgs { config = baseConfig; };
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     ../../modules/neovim_nightly.nix
@@ -11,6 +12,11 @@ in {
     ../../modules/basic.nix
     ../../modules/x.nix
     ../../modules/user.nix
+  ];
+
+  nixpkgs.overlays = [
+    (import (fetchTarball
+      https://github.com/figsoda/fenix/archive/main.tar.gz))
   ];
 
   boot.loader.grub = {

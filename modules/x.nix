@@ -28,7 +28,21 @@
 
       spotify-tui
       spotifyd
-    ];
+
+      efm
+      nixpkgs-fmt
+      yamllint
+      vim-vint
+      shellcheck
+      shfmt
+      unstable.sumneko-lua-language-server
+      stylua
+
+    ] ++ (with nodePackages; [
+      vim-language-server
+      bash-language-server
+
+    ]);
   };
 
   fonts = {
@@ -55,7 +69,7 @@
     xserver = {
       enable = true;
       #xkbVariant = "colemak";
-      displayManager.defaultSession="none+i3";
+      displayManager.defaultSession = "none+i3";
       xkbOptions = "eurosign:e,compose:ralt,terminate:ctrl_alt_bksp,caps:swapescape";
       windowManager.i3 = {
         enable = true;

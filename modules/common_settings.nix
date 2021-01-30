@@ -2,7 +2,9 @@
 let
   baseConfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config = baseConfig; };
-in {
+  moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
+in
+{
   nix.nixPath =
     options.nix.nixPath.default ++
     [ "nixpkgs-overlays=/etc/nixos/nixdots/overlays-compat/" ]
@@ -15,6 +17,15 @@ in {
 
   imports = [
     ../cachix.nix
+  ];
+
+  nixpkgs.overlays = [
+    moz_overlay
+    (self: super: with super; {
+      my-rust-analyzer = callPackage ../packages/rust-analyzer-nightly.nix { };
+      stylua = callPackage ../packages/stylua.nix { };
+      efm = callPackage ../packages/efm.nix { };
+    })
   ];
 
   nixpkgs.config = baseConfig // {

@@ -38,6 +38,8 @@
       unstable.sumneko-lua-language-server
       stylua
 
+      i3status-rust
+
     ] ++ (with nodePackages; [
       vim-language-server
       bash-language-server
@@ -52,8 +54,6 @@
       gentium
       jetbrains-mono
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-      # mredaelli.fontin
-      # mredaelli.fontin-sans
     ];
   };
 
@@ -64,20 +64,12 @@
   };
 
   services = {
-
     gnome3.gnome-keyring.enable = true;
     xserver = {
       enable = true;
-      #xkbVariant = "colemak";
       displayManager.defaultSession = "none+i3";
       xkbOptions = "eurosign:e,compose:ralt,terminate:ctrl_alt_bksp,caps:swapescape";
-      windowManager.i3 = {
-        enable = true;
-        # extraSessionCommands = ''
-        #   xmodmap -e "keycode 117 = Prior"
-        #   xmodmap -e "keycode 112 = Next"
-        # '';
-      };
+      windowManager.i3.enable = true;
 
       xautolock = {
         enable = true;
@@ -88,8 +80,6 @@
         time = 5;
         extraOptions = [ "-detectsleep" ];
       };
-
-      libinput.enable = true;
     };
   };
 }

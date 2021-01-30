@@ -51,6 +51,7 @@ in
 
     printing.enable = true;
     printing.drivers = [ pkgs.brlaser pkgs.brgenml1lpr pkgs.brgenml1cupswrapper ];
+    xserver.libinput.enable = true;
 
     # pcscd.enable = true;
     # udev.packages = [ pkgs.yubikey-personalization ];

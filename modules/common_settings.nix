@@ -25,6 +25,7 @@ in
       my-rust-analyzer = callPackage ../packages/rust-analyzer-nightly.nix { };
       stylua = callPackage ../packages/stylua.nix { };
       efm = callPackage ../packages/efm.nix { };
+      spotifyd = super.spotifyd.override { withMpris = true;}; 
     })
   ];
 

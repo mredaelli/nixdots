@@ -7,6 +7,7 @@
     ../../modules/basic.nix
     ../../modules/x.nix
     ../../modules/user.nix
+    ../../modules/bluetooth.nix
     # ./modules/lari-lap.nix
   ];
   boot = {

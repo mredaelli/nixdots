@@ -10,7 +10,8 @@ in
     ../../modules/neovim_nightly.nix
     ../../modules/common_settings.nix
     ../../modules/basic.nix
-    ../../modules/x.nix
+    ../../modules/wayland.nix
+    ../../modules/workstation.nix
     ../../modules/user.nix
     ../../modules/bluetooth.nix
   ];
@@ -36,11 +37,11 @@ in
     adb.enable = true;
   };
 
-  # virtualisation.docker.enable = true;
-
   services = {
-    openssh.enable = true;
-    openssh.permitRootLogin = "no";
+    openssh = {
+      enable = true;
+      permitRootLogin = "no";
+    };
 
     cron = {
       enable = true;
@@ -50,9 +51,11 @@ in
       ];
     };
 
-    printing.enable = true;
-    printing.drivers = [ pkgs.brlaser pkgs.brgenml1lpr pkgs.brgenml1cupswrapper ];
-    xserver.libinput.enable = true;
+    printing = {
+      enable = true;
+      drivers = [ pkgs.brlaser pkgs.brgenml1lpr pkgs.brgenml1cupswrapper ];
+    };
+    #xserver.libinput.enable = true;
 
     # pcscd.enable = true;
     # udev.packages = [ pkgs.yubikey-personalization ];

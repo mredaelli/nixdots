@@ -1,5 +1,12 @@
 { config, pkgs, options, ... }:
 {
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
+  environment.pathsToLink = [
+    "/share/nix-direnv"
+  ];
   environment = {
     systemPackages = with pkgs; [
       tango-icon-theme
@@ -34,6 +41,8 @@
       stylua
 
       i3status-rust
+
+      nix-direnv
 
     ] ++ (with nodePackages; [
       vim-language-server

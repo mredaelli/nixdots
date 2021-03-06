@@ -5,7 +5,8 @@
     ../../modules/neovim_nightly.nix
     ../../modules/common_settings.nix
     ../../modules/basic.nix
-    ../../modules/x.nix
+    ../../modules/wayland.nix
+    ../../modules/workstation.nix
     ../../modules/user.nix
     ../../modules/bluetooth.nix
     # ./modules/lari-lap.nix

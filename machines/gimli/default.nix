@@ -2,7 +2,6 @@
 let
   baseConfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config = baseConfig; };
-  # mredaelli = import /home/turing/src/nixpkgs { config = baseConfig; };
 in
 {
   imports = [
@@ -14,11 +13,11 @@ in
     ../../modules/workstation.nix
     ../../modules/user.nix
     ../../modules/bluetooth.nix
+    "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/lenovo/thinkpad/x1"
   ];
 
   nixpkgs.overlays = [
-    (import (fetchTarball
-      https://github.com/figsoda/fenix/archive/main.tar.gz))
+    (import (fetchTarball https://github.com/figsoda/fenix/archive/main.tar.gz))
   ];
 
   boot.loader.grub = {
@@ -55,7 +54,8 @@ in
       enable = true;
       drivers = [ pkgs.brlaser pkgs.brgenml1lpr pkgs.brgenml1cupswrapper ];
     };
-    #xserver.libinput.enable = true;
+
+    btrfs.autoScrub.enable = true;
 
     # pcscd.enable = true;
     # udev.packages = [ pkgs.yubikey-personalization ];

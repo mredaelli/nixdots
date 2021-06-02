@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+    [
+      <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
@@ -13,26 +14,31 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/58c2d282-1aaf-447e-abc7-b61bca9d0009";
+    {
+      device = "/dev/disk/by-uuid/58c2d282-1aaf-447e-abc7-b61bca9d0009";
       fsType = "btrfs";
+      options = [ "compress=zstd" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/149D-A782";
+    {
+      device = "/dev/disk/by-uuid/149D-A782";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/cd872682-1c23-46fc-991c-7e547b07842f"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/cd872682-1c23-46fc-991c-7e547b07842f"; }];
 
   fileSystems."/data" =
-    { device = "/dev/disk/by-label/Data";
+    {
+      device = "/dev/disk/by-label/Data";
       fsType = "btrfs";
+      options = [ "compress=zstd" ];
     };
 
   fileSystems."/win" =
-    { device = "/dev/disk/by-label/DATADRIVE1";
+    {
+      device = "/dev/disk/by-label/DATADRIVE1";
       fsType = "ntfs";
     };
 

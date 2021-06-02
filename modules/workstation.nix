@@ -4,9 +4,11 @@
     keep-outputs = true
     keep-derivations = true
   '';
+
   environment.pathsToLink = [
     "/share/nix-direnv"
   ];
+
   environment = {
     systemPackages = with pkgs; [
       tango-icon-theme
@@ -28,6 +30,7 @@
       calibre
       nextcloud-client
       gnome3.libsecret
+      visidata
 
       spotify-tui
       spotifyd
@@ -66,11 +69,14 @@
 
   services = {
     gnome.gnome-keyring.enable = true;
-     pipewire = {
-       enable = true;
-       alsa.enable = true;
-       # alsa.support32Bit = true;
-       pulse.enable = true;
-     };
-  };
-}
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      # alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+
+    services = {
+      gnome.gnome-keyring.enable = true;
+    };
+  }

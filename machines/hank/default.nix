@@ -5,21 +5,15 @@
     ../../modules/neovim_nightly.nix
     ../../modules/common_settings.nix
     ../../modules/basic.nix
-    ../../modules/x.nix
+    ../../modules/wayland.nix
+    ../../modules/workstation.nix
+    ../../modules/bluetooth.nix
     ../../modules/user.nix
   ];
 
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
-  boot.extraModprobeConfig = ''
-    blacklist pcspkr
-    blacklist lpc_ich
-    blacklist gpio-ich
-  '';
 
-  hardware.pulseaudio = {
-    support32Bit = true;
-  };
   hardware.opengl.driSupport32Bit = true;
   hardware.sane = {
     enable = true;
@@ -29,34 +23,28 @@
     systemPackages = with pkgs; [ xsane ];
   };
 
-  # virtualisation.virtualbox.host.enable = true;
-  # virtualisation.virtualbox.host.enableExtensionPack = true;
+  # virtualisation.virtualbox.host = {
+  #   enable = true;
+  #   enableExtensionPack = true;
+  # };
 
-  nixpkgs.overlays = [(
-    self: super: {
-      # gitEmail = super.git.override {
-      #   sendEmailSupport = true;
-      #   withLibsecret = true;
-      # };
-      # neovim = super.neovim.override {
-      #   vimAlias = true;
-      #   viAlias = true;
-      # };
-    }
-  )];
-
+  virtualisation.docker = {
+    enable = true;
+    autoPrune = {
+      enable = true;
+      flags = [ "until=240h" ];
+    };
+  };
 
   users = {
-    defaultUserShell = pkgs.fish;
     extraUsers.ale = {
       isNormalUser = true;
       uid = 1001;
       shell = pkgs.bash;
-      extraGroups = [ "networkmanager"  "scanner" "lp" ];
+      extraGroups = [ "networkmanager" "scanner" "lp" ];
       packages = with pkgs; [ xsane networkmanagerapplet firefox zathura ];
     };
   };
-
 
   networking = {
     hostName = "hank";
@@ -71,17 +59,16 @@
       enable = true;
       drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
     };
-    # cron = {
-    #   enable = true;
-    #   systemCronJobs = [
-    #     "*/10 * * * *     turing   . /etc/profile; DISPLAY=:0.0 time /home/turing/bin/fetch-mail > /tmp/fetch-mail.log 2>&1"
-    #   ];
-    # };
-    openssh.enable = true;
-    xserver = {
-      videoDrivers = [ "nvidia" ];
+    cron = {
+      enable = true;
+      systemCronJobs = [
+        "0 */4 * * *      turing    . /etc/profile ;DISPLAY=:0.0 vdirsyncer sync calendar > /tmp/calsync.log 2>&1"
+        "9,19,29,39,49,59 * * * *      turing    . /etc/profile; DISPLAY=:0.0 /home/turing/bin/reminders"
+      ];
     };
+    openssh.enable = true;
+    btrfs.autoScrub.enable = true;
   };
 
-  system.stateVersion = "18.03"; 
+  system.stateVersion = "18.03";
 }

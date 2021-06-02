@@ -29,6 +29,8 @@
         xdg-desktop-portal-wlr
         xdg-desktop-portal
         xdg_utils
+        imv
+        xwayland
       ];
     };
   };

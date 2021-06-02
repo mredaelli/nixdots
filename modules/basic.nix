@@ -60,8 +60,17 @@
   };
 
   programs = {
-    fish.enable = true;
+    fish = {
+      enable = true;
+      promptInit = ''
+        any-nix-shell fish --info-right | source
+      '';
+    };
     bash.enableCompletion = true;
     thefuck.enable = true;
+  };
+
+  users = {
+    defaultUserShell = pkgs.fish;
   };
 }

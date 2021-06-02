@@ -9,7 +9,6 @@
       psmisc
       procs
       htop
-      ytop
 
       bc
       zip
@@ -20,7 +19,6 @@
       restic
       bashmount
       direnv
-      thefuck
       tldr
       so
 
@@ -30,8 +28,7 @@
       ripgrep
       bat
       sd
-      du-dust
-      ncdu
+      dua
       broot
 
       starship
@@ -43,9 +40,8 @@
       gitAndTools.delta
       gitAndTools.tig
 
-
       weechat
-      taskwarrior
+      ultralist
 
       mu
       neomutt
@@ -56,7 +52,6 @@
       khard
       vdirsyncer
       khal
-
     ];
     variables = {
       EDITOR = "nvim";

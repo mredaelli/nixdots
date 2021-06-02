@@ -11,10 +11,11 @@
     systemPackages = with pkgs; [
       tango-icon-theme
       kitty
+      wezterm
       libnotify
       theme-vertex
       pavucontrol
-      sxiv
+      imv
       nitrogen
       firefox
       tridactyl-native
@@ -37,12 +38,14 @@
       vim-vint
       shellcheck
       shfmt
-      unstable.sumneko-lua-language-server
+      sumneko-lua-language-server
       stylua
 
       i3status-rust
 
       nix-direnv
+
+      alsaUtils
 
     ] ++ (with nodePackages; [
       vim-language-server
@@ -52,7 +55,7 @@
   };
 
   fonts = {
-    enableFontDir = true;
+    fontDir.enable = true;
     fonts = with pkgs; [
       noto-fonts
       gentium
@@ -61,13 +64,13 @@
     ];
   };
 
-  hardware = {
-    pulseaudio = {
-      enable = true;
-    };
-  };
-
   services = {
-    gnome3.gnome-keyring.enable = true;
+    gnome.gnome-keyring.enable = true;
+     pipewire = {
+       enable = true;
+       alsa.enable = true;
+       # alsa.support32Bit = true;
+       pulse.enable = true;
+     };
   };
 }

@@ -5,12 +5,14 @@ let
   moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
 in
 {
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+    autoOptimiseStore = true;
   };
-  nix.autoOptimiseStore = true;
 
   documentation = {
     doc.enable = false;
@@ -41,23 +43,23 @@ in
         config = config.nixpkgs.config;
       };
       jre = pkgs.jdk11;
-        notmuch = pkgs.notmuch.override {
-      withEmacs = false;
-    };
-    visidata = unstable.pkgs.visidata;
-    };
-    };
-
-    console.useXkbConfig = true;
-
-    time.timeZone = "Europe/Rome";
-
-    security.sudo.wheelNeedsPassword = false;
-
-    services = {
-      openssh = {
-        enable = true;
-        permitRootLogin = "no";
+      notmuch = pkgs.notmuch.override {
+        withEmacs = false;
       };
+      visidata = unstable.pkgs.visidata;
     };
-  }
+  };
+
+  console.useXkbConfig = true;
+
+  time.timeZone = "Europe/Rome";
+
+  security.sudo.wheelNeedsPassword = false;
+
+  services = {
+    openssh = {
+      enable = true;
+      permitRootLogin = "no";
+    };
+  };
+}

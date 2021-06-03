@@ -5,12 +5,12 @@
     ../../modules/neovim_nightly.nix
     ../../modules/common_settings.nix
     ../../modules/basic.nix
-    ../../modules/wayland.nix
+    ../../modules/x.nix
     ../../modules/workstation.nix
     ../../modules/user.nix
     ../../modules/bluetooth.nix
-    # ./modules/lari-lap.nix
   ];
+
   boot = {
     loader.grub = {
       enable = true;
@@ -20,39 +20,22 @@
     };
     supportedFilesystems = [ "zfs" ];
   };
-  services.zfs.autoScrub.enable = true;
-  networking.hostId = "9a88f423";
-
-  networking.hostName = "orual";
-
-
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      visidata = with pkgs.python38.pkgs; callPackage /home/turing/visidata.nix { };
-    };
-  };
 
   networking = {
     firewall = {
       allowedTCPPorts = [ 22 50000 50001 ];
       allowedUDPPorts = [ 50000 ];
     };
+    hostId = "9a88f423";
+    hostName = "orual";
   };
 
   environment.systemPackages = with pkgs; [
-    gcc
-    unstable.page
-    unstable.dijo
-    zotero
-      chromium
-      jp
-      rtorrent
-      visidata
-      spotify-tui
-      spotifyd
-      unstable.wally-cli
-      nix-prefetch
-    ];
+    ungoogled-chromium
+    jp
+    rtorrent
+    wally-cli
+  ];
 
   programs.firejail = {
     enable = true;
@@ -64,22 +47,18 @@
     };
   };
 
-  programs.fish.promptInit = ''
-    any-nix-shell fish --info-right | source
-  '';
-
   virtualisation.docker = {
     enable = true;
     autoPrune = {
       enable = true;
-      flags = ["until=240h"];
+      flags = [ "until=240h" ];
     };
   };
 
   services = {
     xserver = {
-     libinput.enable = true;
-      };
+      libinput.enable = true;
+    };
     # acpid = {
     #   enable = true;
     #   handlers.mic_noise = {
@@ -87,7 +66,7 @@
     #     event="jack/headphone HEADPHONE plug";
     #   };
     # };
-  #  openssh.enable = true;
+    openssh.enable = true;
     cron = {
       enable = true;
       systemCronJobs = [
@@ -95,6 +74,7 @@
         "9,19,29,39,49,59 * * * *      turing    . /etc/profile; DISPLAY=:0.0 /home/turing/bin/reminders"
       ];
     };
+    zfs.autoScrub.enable = true;
   };
 
   system.stateVersion = "18.09"; # Did you read the comment?

@@ -4,6 +4,7 @@
     systemPackages = with pkgs; [
       rofi
       dunst
+      flameshot
     ];
   };
 

@@ -35,14 +35,14 @@
       spotify-tui
       spotifyd
 
-      efm
       nixpkgs-fmt
       yamllint
       vim-vint
       shellcheck
       shfmt
       sumneko-lua-language-server
-      stylua
+      unstable.efm-langserver
+      unstable.stylua
 
       i3status-rust
 

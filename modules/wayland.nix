@@ -8,7 +8,6 @@
   };
 
   programs = {
-    adb.enable = true;
     sway = {
       enable = true;
       wrapperFeatures.gtk = true;
@@ -24,6 +23,8 @@
       extraPackages = with pkgs; [
         swaylock-fancy
         swayidle
+        waybar
+        playerctl
         wl-clipboard
         sway-contrib.grimshot
         mako
@@ -32,7 +33,6 @@
         xdg-desktop-portal
         xdg_utils
         imv
-        xwayland
       ];
     };
   };

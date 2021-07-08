@@ -2,7 +2,6 @@
 let
   baseConfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config = baseConfig; };
-  moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
 in
 {
   nix = {
@@ -26,10 +25,7 @@ in
   ];
 
   nixpkgs.overlays = [
-    moz_overlay
     (self: super: with super; {
-      stylua = callPackage ../packages/stylua.nix { };
-      efm = callPackage ../packages/efm.nix { };
       spotifyd = super.spotifyd.override { withMpris = true; };
     })
   ];
@@ -46,7 +42,6 @@ in
       notmuch = pkgs.notmuch.override {
         withEmacs = false;
       };
-      visidata = unstable.pkgs.visidata;
     };
   };
 

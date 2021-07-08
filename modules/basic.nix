@@ -19,7 +19,6 @@
       restic
       bashmount
       direnv
-      tldr
       so
 
       exa
@@ -29,18 +28,16 @@
       bat
       sd
       dua
-      broot
 
       starship
       any-nix-shell
 
-      neovim-nightly
+      unstable.neovim
 
       git
       gitAndTools.delta
       gitAndTools.tig
 
-      weechat
       ultralist
 
       mu
@@ -67,7 +64,6 @@
       '';
     };
     bash.enableCompletion = true;
-    thefuck.enable = true;
   };
 
   users = {

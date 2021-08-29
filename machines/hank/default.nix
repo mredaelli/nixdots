@@ -2,7 +2,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/neovim_nightly.nix
     ../../modules/common_settings.nix
     ../../modules/basic.nix
     ../../modules/wayland.nix
@@ -20,7 +19,7 @@
     extraBackends = [ pkgs.epkowa ];
   };
   environment = {
-    systemPackages = with pkgs; [ xsane ];
+    systemPackages = with pkgs; [ gscan2pdf keepassxc ];
   };
 
   # virtualisation.virtualbox.host = {

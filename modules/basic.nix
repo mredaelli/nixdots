@@ -36,7 +36,7 @@
 
       git
       gitAndTools.delta
-      gitAndTools.tig
+      gitui
 
       ultralist
 

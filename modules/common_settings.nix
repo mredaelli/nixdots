@@ -39,9 +39,9 @@ in
         config = config.nixpkgs.config;
       };
       jre = pkgs.jdk11;
-      notmuch = pkgs.notmuch.override {
-        withEmacs = false;
-      };
+      # notmuch = pkgs.notmuch.override {
+      #   withEmacs = false;
+      # };
     };
   };
 

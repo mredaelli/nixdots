@@ -15,10 +15,6 @@ in
     "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/lenovo/thinkpad/x1"
   ];
 
-  nixpkgs.overlays = [
-    (import (fetchTarball https://github.com/figsoda/fenix/archive/main.tar.gz))
-  ];
-
   boot.loader.grub = {
     enable = true;
     version = 2;
@@ -30,6 +26,9 @@ in
     networkmanager.enable = true;
     firewall.enable = false;
   };
+
+   virtualisation.virtualbox.host.enable = true;
+   users.extraGroups.vboxusers.members = [ "turing" ];
 
   programs = {
     adb.enable = true;
@@ -56,7 +55,6 @@ in
 
     btrfs.autoScrub.enable = true;
 
-    # pcscd.enable = true;
     # udev.packages = [ pkgs.yubikey-personalization ];
     # syncthing = {
     #   enable = true;

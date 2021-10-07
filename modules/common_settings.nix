@@ -26,7 +26,7 @@ in
 
   nixpkgs.overlays = [
     (self: super: with super; {
-      spotifyd = super.spotifyd.override { withMpris = true; };
+      # spotifyd = super.spotifyd.override { withMpris = true; };
     })
   ];
 
@@ -42,6 +42,7 @@ in
       # notmuch = pkgs.notmuch.override {
       #   withEmacs = false;
       # };
+      fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
     };
   };
 

@@ -34,7 +34,7 @@
     jp
     rtorrent
     wally-cli
-  ];
+    keepassxc unstable.innernet ];
 
   virtualisation.docker = {
     enable = true;

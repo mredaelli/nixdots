@@ -32,6 +32,8 @@
       gnome3.libsecret
       visidata
 
+      git-trim
+
       spotify-tui
       spotifyd
 

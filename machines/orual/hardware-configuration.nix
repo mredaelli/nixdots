@@ -11,7 +11,7 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [ "pcie_aspm=off" ];
+  boot.kernelParams = [ "pcie_aspm=off" "elevator=none" ];
   hardware.opengl.driSupport32Bit = true;
 
   hardware.enableRedistributableFirmware = true;
@@ -21,8 +21,13 @@
       fsType = "zfs";
     };
 
+  #fileSystems."/home" =
+  #  { device = "pool/home";
+  #    fsType = "zfs";
+  #  };
+
   fileSystems."/home" =
-    { device = "pool/home";
+    { device = "pool/enc/home";
       fsType = "zfs";
     };
 

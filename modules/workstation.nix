@@ -34,8 +34,7 @@
 
       git-trim
 
-      spotify-tui
-      spotifyd
+      ncspot
 
       nixpkgs-fmt
       yamllint

@@ -13,7 +13,7 @@
     systemPackages = with pkgs; [
       tango-icon-theme
       kitty
-      wezterm
+      unstable.wezterm
       libnotify
       theme-vertex
       pavucontrol
@@ -31,6 +31,9 @@
       nextcloud-client
       gnome3.libsecret
       visidata
+      fx
+      rmlint
+      phototonic
 
       git-trim
 

@@ -1,4 +1,4 @@
-{ config, pkgs, options, ... }:
+{ config, pkgs, options, lib, ... }:
 let
   baseConfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config = baseConfig; };
@@ -15,20 +15,46 @@ in
     "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/lenovo/thinkpad/x1"
   ];
 
-  boot.loader.grub = {
-    enable = true;
-    version = 2;
-    device = "/dev/sda";
+  # erase your darlings
+  environment.etc = {
+    nixos.source = "/persistent/etc/nixos";
+    "NetworkManager/system-connections".source = "/persistent/etc/NetworkManager/system-connections";
+    adjtime.source = "/persistent/etc/adjtime";
+    machine-id.source = "/persistent/etc/machine-id";
+  };
+  systemd.tmpfiles.rules = [
+    "L /var/lib/systemd/backlight - - - - /persistent/var/lib/systemd/backlight"
+  ];
+  users.extraUsers.turing.passwordFile = "/persistent/etc/turing-password";
+  security.sudo.extraConfig = ''
+    # rollback results in sudo lectures after each reboot
+    Defaults lecture = never
+  '';
+
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    supportedFilesystems = [ "zfs" ];
+    initrd = {
+      supportedFilesystems = [ "zfs" ];
+      postDeviceCommands = lib.mkAfter ''
+        zfs rollback -r rpool/enc/local/root@blank
+        zfs rollback -r rpool/enc/local/var@blank
+      '';
+    };
   };
 
   networking = {
     hostName = "gimli";
+    hostId = "b93e7d6e";
     networkmanager.enable = true;
     firewall.enable = false;
   };
 
-   virtualisation.virtualbox.host.enable = true;
-   users.extraGroups.vboxusers.members = [ "turing" ];
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "turing" ];
 
   programs = {
     adb.enable = true;
@@ -43,7 +69,6 @@ in
     cron = {
       enable = true;
       systemCronJobs = [
-        "5,35 */1 * * *   turing   . /etc/profile;DISPLAY=:0.0 time /home/turing/bin/run_restic > /tmp/restic.log 2>&1"
         "0 */4 * * *      turing   . /etc/profile;DISPLAY=:0.0 time vdirsyncer sync > /tmp/davsync.log 2>&1"
       ];
     };
@@ -52,8 +77,7 @@ in
       enable = true;
       drivers = [ pkgs.brlaser pkgs.brgenml1lpr pkgs.brgenml1cupswrapper ];
     };
-
-    btrfs.autoScrub.enable = true;
+    fstrim.enable = true;
 
     # udev.packages = [ pkgs.yubikey-personalization ];
     # syncthing = {
@@ -62,6 +86,7 @@ in
     #   dataDir = "/home/turing/syncthing";
     # };
   };
+
 
   system.stateVersion = "18.03";
 }

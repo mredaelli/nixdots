@@ -57,6 +57,7 @@
       ];
     };
     zfs.autoScrub.enable = true;
+    fstrim.enable = true;
   };
 
   system.stateVersion = "18.09"; # Did you read the comment?

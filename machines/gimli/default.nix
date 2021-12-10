@@ -78,6 +78,7 @@ in
       drivers = [ pkgs.brlaser pkgs.brgenml1lpr pkgs.brgenml1cupswrapper ];
     };
     fstrim.enable = true;
+    zfs.autoScrub.enable = true;
 
     # udev.packages = [ pkgs.yubikey-personalization ];
     # syncthing = {

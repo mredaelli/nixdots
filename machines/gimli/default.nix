@@ -51,6 +51,21 @@ in
     hostId = "b93e7d6e";
     networkmanager.enable = true;
     firewall.enable = false;
+    wireguard.interfaces = {
+        wg0 = {
+          ips = [ "10.0.25.90/24" ];
+          listenPort = 51820;
+          privateKeyFile = "/persistent/wireguard/private";
+          peers = [
+            {
+              publicKey = "VTaS8M1bema9RmA0RYYOiy1HiNPDVSCENBN/iRXeuUw=";
+              allowedIPs = [ "10.0.25.0/24" ];
+              endpoint = "88.198.194.32:51820";
+              persistentKeepalive = 25;
+            }
+          ];
+        };
+      };
   };
 
   virtualisation.virtualbox.host.enable = true;
@@ -79,6 +94,10 @@ in
     };
     fstrim.enable = true;
     zfs.autoScrub.enable = true;
+    mysql = {
+      enable = true;
+      package =  pkgs.mysql57;
+    } ;
 
     # udev.packages = [ pkgs.yubikey-personalization ];
     # syncthing = {

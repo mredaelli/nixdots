@@ -5,6 +5,10 @@
       cachix
       yadm
 
+      bash
+      fish
+      elvish
+
       lsof
       psmisc
       procs
@@ -29,6 +33,7 @@
       sd
       dua
 
+      zoxide
       starship
       any-nix-shell
 
@@ -53,12 +58,12 @@
     variables = {
       EDITOR = "nvim";
     };
-    shells = [ pkgs.bash pkgs.fish ];
+    shells = [ pkgs.elvish pkgs.bash pkgs.fish ];
   };
 
   programs = {
     fish = {
-      enable = true;
+      # enable = true;
       promptInit = ''
         any-nix-shell fish --info-right | source
       '';
@@ -67,6 +72,6 @@
   };
 
   users = {
-    defaultUserShell = pkgs.fish;
+    defaultUserShell = pkgs.elvish;
   };
 }

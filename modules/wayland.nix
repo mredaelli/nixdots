@@ -28,7 +28,8 @@
         wl-clipboard
         sway-contrib.grimshot
         mako
-        wofi
+        unstable.rofi-wayland
+        wlsunset
         xdg-desktop-portal-wlr
         xdg-desktop-portal
         xdg_utils

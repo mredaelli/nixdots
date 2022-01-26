@@ -1,4 +1,4 @@
-{ config, pkgs, options, ... }:
+{ config, pkgs, options, lib, ... }:
 {
   # remember to load the video card kernel module in hardware-configuration
 
@@ -35,6 +35,16 @@
         xdg_utils
         imv
       ];
+    };
+  };
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${lib.makeBinPath [pkgs.greetd.tuigreet] }/tuigreet --time --cmd sway";
+        user = "greeter";
+      };
     };
   };
 }

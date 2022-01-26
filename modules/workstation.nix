@@ -33,7 +33,7 @@
       visidata
       fx
       rmlint
-      phototonic
+      gthumb
 
       git-trim
 

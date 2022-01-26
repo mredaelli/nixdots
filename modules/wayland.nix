@@ -38,8 +38,10 @@
     };
   };
 
+  boot.kernelParams = [ "console=tty1" ];
   services.greetd = {
     enable = true;
+    vt = 2;
     settings = {
       default_session = {
         command = "${lib.makeBinPath [pkgs.greetd.tuigreet] }/tuigreet --time --cmd sway";

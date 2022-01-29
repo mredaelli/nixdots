@@ -1,7 +1,6 @@
 { config, pkgs, options, ... }:
 let
   baseConfig = { allowUnfree = true; };
-  unstable = import <nixos-unstable> { config = baseConfig; };
 in
 {
   nix = {
@@ -39,9 +38,6 @@ in
         config = config.nixpkgs.config;
       };
       jre = pkgs.jdk11;
-      # notmuch = pkgs.notmuch.override {
-      #   withEmacs = false;
-      # };
       fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
     };
   };

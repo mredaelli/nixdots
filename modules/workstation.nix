@@ -32,6 +32,7 @@
       gnome3.libsecret
       visidata
       fx
+      mdcat
       rmlint
       gthumb
 
@@ -39,14 +40,15 @@
 
       ncspot
 
+      efm-langserver
       nixpkgs-fmt
       yamllint
       vim-vint
       shellcheck
       shfmt
       sumneko-lua-language-server
-      unstable.efm-langserver
-      unstable.stylua
+      stylua
+      pandoc
 
       i3status-rust
 

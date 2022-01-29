@@ -33,8 +33,8 @@ in
 
   boot = {
     loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      stemd-boot.enable = true;
+      i.canTouchEfiVariables = true;
     };
     supportedFilesystems = [ "zfs" ];
     initrd = {

@@ -1,8 +1,4 @@
 { config, pkgs, options, lib, ... }:
-let
-  baseConfig = { allowUnfree = true; };
-  unstable = import <nixos-unstable> { config = baseConfig; };
-in
 {
   imports = [
     ./hardware-configuration.nix
@@ -23,7 +19,7 @@ in
     machine-id.source = "/persistent/etc/machine-id";
   };
   systemd.tmpfiles.rules = [
-    "L /var/lib/systemd/backlight - - - - /persistent/var/lib/systemd/backlight"
+    "L+ /var/lib/systemd/backlight - - - - /persistent/var/lib/systemd/backlight"
   ];
   users.extraUsers.turing.passwordFile = "/persistent/etc/turing-password";
   security.sudo.extraConfig = ''
@@ -33,8 +29,8 @@ in
 
   boot = {
     loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      system-boot.enable = true;
+      efi.caTouchEfiVariables = true;
     };
     supportedFilesystems = [ "zfs" ];
     initrd = {
@@ -52,20 +48,20 @@ in
     networkmanager.enable = true;
     firewall.enable = false;
     wireguard.interfaces = {
-        wg0 = {
-          ips = [ "10.0.25.90/24" ];
-          listenPort = 51820;
-          privateKeyFile = "/persistent/wireguard/private";
-          peers = [
-            {
-              publicKey = "VTaS8M1bema9RmA0RYYOiy1HiNPDVSCENBN/iRXeuUw=";
-              allowedIPs = [ "10.0.25.0/24" ];
-              endpoint = "88.198.194.32:51820";
-              persistentKeepalive = 25;
-            }
-          ];
-        };
+      wg0 = {
+        ips = [ "10.0.25.90/24" ];
+        listenPort = 51820;
+        privateKeyFile = "/persistent/wireguard/private";
+        peers = [
+          {
+            publicKey = "VTaS8M1bema9RmA0RYYOiy1HiNPDVSCENBN/iRXeuUw=";
+            allowedIPs = [ "10.0.25.0/24" ];
+            endpoint = "88.198.194.32:51820";
+            persistentKeepalive = 25;
+          }
+        ];
       };
+    };
   };
 
   virtualisation.virtualbox.host.enable = true;
@@ -94,17 +90,6 @@ in
     };
     fstrim.enable = true;
     zfs.autoScrub.enable = true;
-    mysql = {
-      enable = true;
-      package =  pkgs.mysql57;
-    } ;
-
-    # udev.packages = [ pkgs.yubikey-personalization ];
-    # syncthing = {
-    #   enable = true;
-    #   user = "turing";
-    #   dataDir = "/home/turing/syncthing";
-    # };
   };
 
 

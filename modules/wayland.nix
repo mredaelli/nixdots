@@ -21,6 +21,7 @@
         export _JAVA_AWT_WM_NONREPARENTING=1
         export MOZ_ENABLE_WAYLAND=1
         export XDG_CURRENT_DESKTOP=sway
+        export MOZ_WEBRENDER=1
       '';
       extraPackages = with pkgs; [
         swaylock-fancy

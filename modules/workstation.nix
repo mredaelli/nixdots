@@ -5,11 +5,11 @@
     keep-derivations = true
   '';
 
-  environment.pathsToLink = [
-    "/share/nix-direnv"
-  ];
-
   environment = {
+    pathsToLink = [
+      "/share/nix-direnv"
+    ];
+    homeBinInPath = true;
     systemPackages = with pkgs; [
       tango-icon-theme
       kitty

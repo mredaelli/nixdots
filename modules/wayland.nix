@@ -7,6 +7,8 @@
     driSupport = true;
   };
 
+  # environment.noXlibs = true;
+
   programs = {
     sway = {
       enable = true;
@@ -27,7 +29,7 @@
         playerctl
         wl-clipboard
         sway-contrib.grimshot
-        mako
+        unstable.swaynotificationcenter #mako
         unstable.rofi-wayland
         wlsunset
         xdg-desktop-portal-wlr

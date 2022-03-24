@@ -8,6 +8,8 @@
     ../../modules/workstation.nix
     ../../modules/user.nix
     ../../modules/bluetooth.nix
+    ../../modules/laptop.nix
+    ../../modules/zfs.nix
     "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/lenovo/thinkpad/x1"
   ];
 
@@ -32,9 +34,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    supportedFilesystems = [ "zfs" ];
     initrd = {
-      supportedFilesystems = [ "zfs" ];
       postDeviceCommands = lib.mkAfter ''
         zfs rollback -r rpool/enc/local/root@blank
         zfs rollback -r rpool/enc/local/var@blank
@@ -89,7 +89,6 @@
       drivers = [ pkgs.brlaser pkgs.brgenml1lpr pkgs.brgenml1cupswrapper ];
     };
     fstrim.enable = true;
-    zfs.autoScrub.enable = true;
   };
 
 

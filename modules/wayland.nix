@@ -37,6 +37,7 @@
         xdg-desktop-portal
         xdg_utils
         imv
+        kanshi
       ];
     };
   };

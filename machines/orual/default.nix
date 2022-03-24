@@ -9,6 +9,8 @@
     ../../modules/workstation.nix
     ../../modules/user.nix
     ../../modules/bluetooth.nix
+    ../../modules/laptop.nix
+    ../../modules/zfs.nix
   ];
 
   # erase your darlings
@@ -27,13 +29,9 @@
     Defaults lecture = never
   '';
 
-  boot = {
-    supportedFilesystems = [ "zfs" ];
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
 
   networking = {
@@ -52,6 +50,7 @@
     wally-cli
     keepassxc
     unstable.innernet
+    kanshi
   ];
 
   virtualisation.docker = {

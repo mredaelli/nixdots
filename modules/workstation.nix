@@ -10,16 +10,17 @@
       "/share/nix-direnv"
     ];
     homeBinInPath = true;
+    variables = {
+       XCURSOR_SIZE="64";
+       XCURSOR_THEME="Qogir-dark";
+      };
     systemPackages = with pkgs; [
-      tango-icon-theme
       kitty
       unstable.wezterm
       libnotify
-      theme-vertex
       pavucontrol
       imv
       nitrogen
-      firefox
       tridactyl-native
       libreoffice
       gimp
@@ -55,6 +56,9 @@
       nix-direnv
 
       alsaUtils
+
+      matcha-gtk-theme
+      qogir-icon-theme
 
     ] ++ (with nodePackages; [
       vim-language-server

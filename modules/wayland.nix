@@ -22,6 +22,7 @@
         export MOZ_ENABLE_WAYLAND=1
         export XDG_CURRENT_DESKTOP=sway
         export MOZ_WEBRENDER=1
+        export GTK_THEME=Matcha-dark-sea
       '';
       extraPackages = with pkgs; [
         swaylock-fancy
@@ -35,9 +36,11 @@
         wlsunset
         xdg-desktop-portal-wlr
         xdg-desktop-portal
+        xdg-desktop-portal-gtk
         xdg_utils
         imv
         kanshi
+        firefox-wayland
       ];
     };
   };

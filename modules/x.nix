@@ -5,6 +5,7 @@
       rofi
       dunst
       flameshot
+      firefox
     ];
   };
 

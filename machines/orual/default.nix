@@ -2,7 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    <nixos-hardware/lenovo/thinkpad/p14s/amd/gen2>
+    <nixos-hardware/lenovo/thinkpad>
     ../../modules/common_settings.nix
     ../../modules/basic.nix
     ../../modules/wayland.nix

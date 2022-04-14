@@ -23,6 +23,10 @@
         export XDG_CURRENT_DESKTOP=sway
         export MOZ_WEBRENDER=1
         export GTK_THEME=Matcha-dark-sea
+        export XCURSOR_SIZE=64
+        export XCURSOR_THEME=Qogir-dark
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-theme $XCURSOR_THEME
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-size $XCURSOR_SIZE
       '';
       extraPackages = with pkgs; [
         swaylock-fancy

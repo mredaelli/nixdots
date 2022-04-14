@@ -10,10 +10,6 @@
       "/share/nix-direnv"
     ];
     homeBinInPath = true;
-    variables = {
-       XCURSOR_SIZE="64";
-       XCURSOR_THEME="Qogir-dark";
-      };
     systemPackages = with pkgs; [
       kitty
       unstable.wezterm
@@ -59,7 +55,6 @@
 
       matcha-gtk-theme
       qogir-icon-theme
-
     ] ++ (with nodePackages; [
       vim-language-server
       bash-language-server
